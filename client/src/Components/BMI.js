@@ -1,84 +1,95 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ToolbarMenu from "./AppBar/ToolbarMenu";
-import { Button, MenuItem } from "@material-ui/core";
+import React,{Component} from "react";
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,Container, Row, Col } from 'reactstrap';
+import {Card, Button, ModalTitle}  from 'react-bootstrap';
+import male from '../assets/male.png';
+import female from '../assets/female.png'
 
-const styles = {
-  root: {
-    flexGrow: 1
-  },
-  grow: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
-  }
-};
-
-function ButtonAppBar(props) {
-  const { classes } = props;
-  function onLogin() {
-    alert("Login TBD");
-  }
-  function onSignup() {
-    alert("Signup TBD");
+class BMI extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapsed: true
+    }
   }
 
-  return (
-    <AppBar position="fixed">
-      <Toolbar>
-        <IconButton color="inherit" aria-label="Menu">
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="title" color="inherit">
-          MyApp
-        </Typography>
+  render() {
+    const toggleNavbar = () => this.setState({collapsed:!this.state.collapsed});
+    return (
+      <div>
+        <Navbar color="faded" light>
+        <NavbarBrand href="/" className="mr-auto">reactstrap</NavbarBrand>
+        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+        <Collapse isOpen={!this.state.collapsed} navbar>
+          <Nav navbar>
+            <NavItem>
+              <NavLink href="/aboutme">About Me</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+      <Container style={{paddingLeft:'1.5rem', background: "#08081d", height:"90vh"}}>
+      <br></br>
+      <Row>
+        <Col>
+          <Card style={{textAlign:"center", background:'#000', width: '9rem' , height:'9rem' }}>
+            <div className="text-center">
+              <img className="gender-img" src={male} />
+            </div>
+            <Card.Body>
+            <Card.Title className="gender-title">MALE</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col>
+          <Card style={{textAlign:"center", background:'#000', width: '9rem' , height:'9rem' }}>
+            <div className="text-center">
+              <img className="gender-img" src={female} />
+            </div>
+            <Card.Body>
+              <Card.Title className="gender-title">FEMALE</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <br></br>
+      <Row>
+        <Col>
+          <Card style={{textAlign:"center", background:'#000', width: '20rem' , height:'9rem' }}>
+            <div className="text-center">
+              
+            </div>
+            <Card.Body>
+            <Card.Title className="gender-title">MALE</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <br></br>
+      <Row>
+        <Col>
+          <Card style={{textAlign:"center", background:'#000', width: '20rem' , height:'9rem' }}>
+            <div className="text-center">
+              
+            </div>
+            <Card.Body>
+            <Card.Title className="gender-title">MALE</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+    <Button className="button-bmi btn-block">CALCULATE YOUR BMI</Button>
+      </div>
+      
+    );
+  }
+  
+  
 
-        <ToolbarMenu
-          render={collapsed => {
-            return collapsed
-              ? [
-                  <MenuItem key="login" onClick={onLogin} autoclose={true}>
-                    Login
-                  </MenuItem>,
-                  <MenuItem key="signup" onClick={onSignup}>
-                    Signup
-                  </MenuItem>
-                ]
-              : [
-                  <Button
-                    key="login"
-                    color="inherit"
-                    onClick={onLogin}
-                    className={classes.menuButton}
-                  >
-                    Login
-                  </Button>,
-                  <Button
-                    key="signup"
-                    color="inherit"
-                    onClick={onSignup}
-                    className={classes.menuButton}
-                  >
-                    Signup
-                  </Button>
-                ];
-          }}
-        />
-      </Toolbar>
-    </AppBar>
-  );
+  
 }
 
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(ButtonAppBar);
+export default BMI;
